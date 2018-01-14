@@ -25,7 +25,7 @@ def ProcessSitemap(url):
         soup = bs(r.content, features="xml")
         entries = [(x.find('loc').text.split('/')[4], x.find('lastmod').text) \
             for x in soup.find_all('url') if x.find('changefreq') is None]
-        eprint(f"  - {len(entries) loci found}")
+        eprint(f"  - {len(entries)} loci found.")
         UpdateMap(n, entries)
         return
     else:

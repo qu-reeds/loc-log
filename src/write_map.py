@@ -17,7 +17,7 @@ def UpdateMap(n, entries):
         df = pd.read_csv(map_fname, sep='\t')
         if len(entries) == len(df.index):
             # no update to be made
-            eprint(f"  - No new loci.").
+            eprint(f"  - No new loci.")
             return
         else:
             # this is an update, check if entries are already on file
