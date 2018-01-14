@@ -7,12 +7,10 @@ import pandas as pd
 def UpdateMap(n, entries):
     """Update the map directory corresponding to n,
     with the entries provided, if necessary."""
-    map_dir = pjoin(dirname(__file__), '../map/'+n+'/')
-    map_fname = pjoin(map_dir, 'map.tsv')
+    map_dir = pjoin(dirname(__file__), '../log/map/')
+    map_fname = pjoin(map_dir, f'{n}.tsv')
     if not isdir(map_dir):
-        from os import makedirs
-        makedirs(map_dir)
-        eprint(f"  - Making map directory '{n}'.")
+        raise ValueError('Directory missing, cancelling.')
     if exists(map_fname):
         df = pd.read_csv(map_fname, sep='\t')
         if len(entries) == len(df.index):
