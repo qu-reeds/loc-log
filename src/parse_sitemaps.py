@@ -11,7 +11,7 @@ def PullSitemapURLs():
     """Get all sitemaps for naivelocus.com."""
     r = requests.get('http://naivelocus.com/sitemap.xml')
     if r.status_code == 200:
-        soup = bs(r.content, features="xml")
+        soup = bs(r.content, "lxml", features="xml")
         locs = [x.text for x in soup.find_all('loc')]
         return locs
     else:
@@ -22,7 +22,7 @@ def ProcessSitemap(url):
     n = re.findall(r'(\d+)\.xml', url)[0]
     r = requests.get(url)
     if r.status_code == 200:
-        soup = bs(r.content, features="xml")
+        soup = bs(r.content, "lxml", features="xml")
         entries = [(x.find('loc').text.split('/')[4], x.find('lastmod').text) \
             for x in soup.find_all('url') if x.find('changefreq') is None]
         eprint(f"  - {len(entries)} loci found.")
